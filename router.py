@@ -1,8 +1,7 @@
 from pymongo import MongoClient
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 import company_model_and_func as comp
 import revenue_model_and_func as rev
-from http import HTTPStatus
 # pip install pymongo
 # pip install fastapi
 # pip install uvicorn
@@ -33,7 +32,7 @@ def post_company(company: comp.Company):
     companies_collection.insert_one(dict(company))
 
 # company get method -> returns a specific company that matches the company name given
-@app.get('/{name}')
+@app.get('/name/{name}')
 def get_a_company(name: str):
     return comp.company_dict(companies_collection.find_one({"name": name}))
 
@@ -56,8 +55,9 @@ def post_revenue(revenue: rev.Revenue):
     for company in comp.list_of_companies(companies_collection.find()):
         if company["name"] == revenue["company_name"]:
             revenues_collection.insert_one(revenue)
-            return HTTPStatus.OK
-    return HTTPStatus.NOT_FOUND
+            return None
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
         
 # company and revenues get method -> returns the company info and revenues of the company name given 
 @app.get('/all/{company_name}')
