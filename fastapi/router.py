@@ -12,7 +12,7 @@ import revenue_model_and_func as rev
 # MongoDB connection
 username = "root"
 password = "root"
-client = MongoClient(f"mongodb://{username}:{password}@localhost:27017")
+client = MongoClient(f"mongodb://{username}:{password}@mongo")
 db = client.companies
 companies_collection = db.companies
 revenues_collection = db.revenues
@@ -59,7 +59,7 @@ def get_companies_by_field(field: str):
 @app.get('/revenues/{company_name}')
 def get_revenues_for_company(company_name: str, is_func_req: int = 0):
 # is_func_req is an indicator to whether the function is being called from the get_all_data_by_company_name and if so won't raise the 404
-    revenues_of_a_company = rev.list_of_revenues(revenues_collection.find({"company_name": {"$eq": company_name}}))
+    revenues_of_a_company = rev.list_of_revenues(revenues_collection.find({"company_name": {"$eq": company_name}}).sort({"year" : -1}))
     if revenues_of_a_company != []:
         return revenues_of_a_company
     if is_func_req == 0:
@@ -87,6 +87,6 @@ def post_revenue(revenue: rev.Revenue):
 @app.get('/all/{company_name}')
 def get_all_data_by_company_name(company_name: str):
     all_data = []
-    all_data.append(get_a_company(company_name))
     all_data.append(get_revenues_for_company(company_name, is_func_req = 1))
+    all_data.insert(0, get_a_company(company_name))
     return all_data

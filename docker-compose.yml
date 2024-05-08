@@ -1,9 +1,32 @@
+networks:
+  vnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.1.0.0/28
+
 services:
+
+  fastapi:
+    build: ./fastapi
+    image: fastapi:app
+    networks:
+      vnet:
+        ipv4_address: 10.1.0.2
+    ports: 
+      - 80:80
+    depends_on:
+      - mongo
+
+
   mongo:
     image: mongo:7.0
-    ports: 
-    - 27017:27017
     environment: 
       MONGO_INITDB_ROOT_USERNAME: 'root'
       MONGO_INITDB_ROOT_PASSWORD: 'root'
-    
+    networks:
+      vnet:
+        ipv4_address: 10.1.0.3
+    ports: 
+      - 27017:27017
