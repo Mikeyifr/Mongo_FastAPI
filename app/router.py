@@ -28,6 +28,9 @@ app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 def redirect_to_home(url: str = "/", status_code: int = 302):
      return RedirectResponse(url, status_code=status_code)
 
+def empty_database(url: str = "/add/company", status_code: int = 302):
+     return RedirectResponse(url, status_code=status_code)
+
 
 # companies get method -> returns all of the companies
 @app.get('/')
@@ -37,7 +40,7 @@ def get_companies(request: Request):
         headings = ["name","field","manager","phone"]
         return templates.TemplateResponse('list_of_companies.html', {'request': request, 'headings': headings, 'companies': companies})
     else:
-        return "Sorry, There are no companies in the table"
+        return empty_database()
 
 
 

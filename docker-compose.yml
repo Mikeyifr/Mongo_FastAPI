@@ -15,7 +15,7 @@ services:
       vnet:
         ipv4_address: 10.1.0.2
     ports: 
-      - 80:80
+      - 8080:8080
     depends_on:
       - mongo
 
