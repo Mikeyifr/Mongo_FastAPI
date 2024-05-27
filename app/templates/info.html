@@ -66,6 +66,7 @@
                 position: absolute;
                 left: 50%; 
                 transform: translateX(-50%);  
+                width: 4%;
             }
             .button2 {
                 margin: 10px;
@@ -99,7 +100,7 @@
                 line-height: 25px;
                 margin-left: 0%;
                 margin-right: auto;
-                margin-top: 125px;
+                margin-top: 100px;
                 position: absolute;
                 left: 50%; 
                 transform: translateX(-50%);
@@ -140,13 +141,13 @@
             {% endfor %}
         </table>
         <a href="/">
-            <input type="button" class="button" value="Companies">
+            <input type="button" class="button3" value="Companies">
         </a>
         <a href="/update/company/{{ company.name }}">
-            <input type="button" class="button2" value="Update">
+            <input type="button" class="button" value="Update">
         </a>
         <a href="/remove/company/{{ company.name }}">
-            <input type="button" class="button3" value="Remove Company">
+            <input type="button" class="button2" value="remove">
         </a>
         <script>
             const tableRows = document.querySelectorAll(".tdclick");
