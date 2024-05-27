@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+        body {
+            background: #eee !important;
+            text-align: center;
+        }
+        form {
+            display: inline-block;
+        }
+        .form-signin-heading {
+            font-family: Arial;
+	        margin-bottom: 10px;
+	    }
+        .form-signin {
+            max-width: 450px;
+            padding: 200px 50px 200px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .wrapper {
+            margin-top: 80px;
+            margin-bottom: 80px;
+            justify-content: center;
+            align-items: center;
+            display: block;
+            text-align: center;
+            height: 100vh;
+        }
+        .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            margin: 15px;
+        }
+        .button {
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-family: Arial;
+            font-weight: bold;
+            background: #7d7d7d;
+            padding: 5px;
+            text-align: center;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            line-height: 30px;
+            width: 25%;
+        }
+        input[type="text"] {
+	        margin-bottom: -1px;
+	        border-bottom-left-radius: 0;
+	        border-bottom-right-radius: 0;
+	    }
+        input[type="button"] {
+            width: 100%;
+            font-family: Arial;
+            font-weight: bold;
+            background: #7d7d7d;
+            padding: 5px;
+            text-align: center;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            line-height: 35px;
+        }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form class="form-signin" method="POST" action="/update/company/{{ update_company_name }}">
+        <h2 class="form-signin-heading">Update A Company</h2>
+        <input type="text" class="form-control" name="name" value="{{ company.name }}" placeholder="{{ company.name }}" />
+        <input type="text" class="form-control" name="field" value="{{ company.field }}" placeholder="{{ company.field }}" />
+        <input type="text" class="form-control" name="manager" value="{{ company.manager }}" placeholder="{{ company.manager }}" />
+        <input type="text" class="form-control" name="phone" value="{{ company.phone }}" placeholder="{{ company.phone }}" />
+        <button class="button" type="submit">Update</button>
+        <a href="/">
+            <input type="button" value="companies">
+        </a>
+    </form>
+  </div>
+</body>
+</html>
