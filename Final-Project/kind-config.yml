@@ -1,0 +1,22 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+  apiServerAddress: 10.0.0.14
+  apiServerPort: 59014
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 30000
+    hostPort: 30000
+    listenAddress: "0.0.0.0"
+- role: worker
+  extraMounts:
+  - hostPath: ./jenkins-data
+    containerPath: /jenkins-data
+  extraPortMappings:
+  - containerPort: 30001
+    hostPort: 80
+    listenAddress: "0.0.0.0"
+  - containerPort: 30002
+    hostPort: 8080
+    listenAddress: "0.0.0.0"

@@ -1,0 +1,68 @@
+namespace: jenkins-namespace
+
+jenkinsMaster:
+  image: roiyki/jenkins-helm:latest
+  imagePullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 8080
+    nodePort: 30002
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 1000
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "2Gi"
+      cpu: "2"
+  volumeMounts:
+    - name: jenkins-home
+      mountPath: /var/jenkins_home
+  volumes:
+    - name: jenkins-home
+      persistentVolumeClaim:
+        claimName: jenkins-pvc
+  
+serviceAccount:
+  create: true
+  name: jenkins-sa
+  annotations:
+    key1: value1
+    key2: value2
+  automount: true
+
+# jenkinsDinD:
+#   image: docker:20.10.8-dind
+#   imagePullPolicy: IfNotPresent
+#   service:
+#     type: ClusterIP
+#     port: 2376
+#   resources:
+#     requests:
+#       memory: "256Mi"
+#       cpu: "250m"
+#     limits:
+#       memory: "1Gi"
+#       cpu: "1"
+#   volumeMounts:
+#     - name: docker-certs
+#       mountPath: /certs/client
+#   volumes:
+#     - name: docker-certs
+#       emptyDir: {}
+
+persistence:
+  enabled: true
+  storageClass: "standard"  # Adjust according to your storage class
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 31000
+
+ingress:
+  enabled: false

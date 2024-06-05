@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Companies</title>
+        <link rel="icon" type="image/icon" href="/templates/favicon.ico">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
@@ -65,7 +67,7 @@
             </tr>
             {% for company in companies %}
             <tr class="trstyle">
-                <td class="tdclick" data-href="http://127.0.0.1:8000/{{ company.name }}">
+                <td class="tdclick" data-href="/{{ company.name }}">
                     {{ company.name }}
                 </td>
                 <td>

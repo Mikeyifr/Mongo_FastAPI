@@ -1,0 +1,80 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: maven
+                image: maven:alpine
+                command:
+                - cat
+                tty: true
+              - name: mongo
+                image: mongo:7.0
+                env:
+                - name: MONGO_INITDB_ROOT_USERNAME
+                  value: "root"
+                - name: MONGO_INITDB_ROOT_PASSWORD
+                  value: "root"
+              - name: ez-docker-helm-build
+                image: ezezeasy/ez-docker-helm-build:1.41
+                imagePullPolicy: Always
+                securityContext:
+                  privileged: true
+            '''
+        }
+    }
+
+    environment {
+        DOCKER_IMAGE = "mikey8520/final-project"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('maven version') {
+            steps {
+                container('maven') {
+                    sh 'mvn -version'
+                }
+            }
+        }
+
+        stage('Build and Push Docker Images one with build number tag and one to replace the latest') {
+            when {
+                branch 'main'
+            }
+            steps {
+                container('ez-docker-helm-build') {
+                    script {
+                        withDockerRegistry(credentialsId: '572e9b6d-3abc-4c15-ad0b-206d2db3ee7b') {
+                            // Build and Push Maven Docker image
+                            sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ./app"
+                            sh "docker push ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
+                            sh "docker tag ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ${DOCKER_IMAGE}"
+                            sh "docker push ${DOCKER_IMAGE}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline post'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed, check logs for more info!'
+        }
+    }
+}

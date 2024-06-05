@@ -1,0 +1,25 @@
+fastapi:
+  image:
+    repository: mikey8520/final-project
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    container_port: 8000
+  service:
+    port: 8081
+    nodePort: 30001
+
+mongo:
+  image:
+    image_name: mongo:7.0
+    pullPolicy: IfNotPresent
+  cred:
+    username: "root"
+    password: "root"
+
+serviceAccount:
+  create: true
+  name: my-service-account
+  annotations:
+    key1: value1
+    key2: value2
+  automount: true

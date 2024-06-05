@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  type: NodePort
+  selector:
+    app: fastapi
+  ports:
+    - name: http
+      port: {{ .Values.fastapi.service.port }}
+      targetPort: {{ .Values.fastapi.image.container_port }}
+      nodePort: {{ .Values.fastapi.service.nodePort }}
+      protocol: TCP 

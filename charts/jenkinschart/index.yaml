@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  jenkinschart:
+  - apiVersion: v2
+    appVersion: 2.452.1
+    created: "2024-06-06T02:03:00.4864228+03:00"
+    description: A Helm chart for Jenkins with DinD workers
+    digest: acaa40749baeb0686f418cbf0eca79bfb94cb93190d382440358f2525f9b4d2c
+    name: jenkinschart
+    type: application
+    urls:
+    - jenkinschart-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-06-06T02:03:00.4854238+03:00"
