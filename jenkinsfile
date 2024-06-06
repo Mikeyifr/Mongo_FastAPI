@@ -14,14 +14,11 @@ pipeline {
         }
     }
 
-    // Define credentials for Git access (replace with your credentials ID)
-    credentialsId 'gitauth'
-
     stages {
         // Clone the Git repository
         stage('Clone Repo') {
             steps {
-                git branch: 'master', credentialsId: credentialsId, url: 'https://github.com/Mikeyifr/Mongo_FastAPI.git'
+                git branch: 'master', credentialsId: 'gitauth', url: 'https://github.com/Mikeyifr/Mongo_FastAPI.git'
             }
         }
 
@@ -32,10 +29,11 @@ pipeline {
                 sh '''
                 mvn package -Ddockerfile.build=true
                 '''
-
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerauth') {
-                    docker.push image: 'mikey8520/final-project:${BUILD_NUMBER}'
-                    docker.push image: 'mikey8520/final-project:latest'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerauth') {
+                        docker.push image: 'mikey8520/final-project:${BUILD_NUMBER}'
+                        docker.push image: 'mikey8520/final-project:latest'
+                    }
                 }
             }
         }
