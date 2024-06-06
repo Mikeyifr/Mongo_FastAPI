@@ -8,72 +8,36 @@ pipeline {
               containers:
               - name: maven
                 image: maven:alpine
-                command:
-                - cat
-                tty: true
-              - name: mongo
-                image: mongo:7.0
-                env:
-                - name: MONGO_INITDB_ROOT_USERNAME
-                  value: "root"
-                - name: MONGO_INITDB_ROOT_PASSWORD
-                  value: "root"
-              - name: ez-docker-helm-build
-                image: ezezeasy/ez-docker-helm-build:1.41
-                imagePullPolicy: Always
-                securityContext:
-                  privileged: true
+                command: mvn package 
+                args: Ddockerfile.build=true
             '''
         }
     }
 
-    environment {
-        DOCKER_IMAGE = "mikey8520/final-project"
-    }
+    // Define credentials for Git access (replace with your credentials ID)
+    credentialsId 'gitauth'
 
     stages {
-        stage('clone repo') {
+        // Clone the Git repository
+        stage('Clone Repo') {
             steps {
-                script {
-                    sh 'git clone https://github.com/Mikeyifr/Mongo_FastAPI.git'
-                }
+                git branch: 'master', credentialsId: credentialsId, url: 'https://github.com/Mikeyifr/Mongo_FastAPI.git'
             }
         }
 
-        stage('maven version') {
+        // Build and push with build tag (replace with actual build commands)
+        stage('Build and Push (build tag)') {
             steps {
-                container('maven') {
-                    sh 'mvn -version'
+                // Use container workspace (replace with actual build commands using Maven)
+                sh '''
+                mvn package -Ddockerfile.build=true
+                '''
+
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerauth') {
+                    docker.push image: 'mikey8520/final-project:${BUILD_NUMBER}'
+                    docker.push image: 'mikey8520/final-project:latest'
                 }
             }
-        }
-
-        stage('Build and Push Docker Images one with build number tag and one to replace the latest') {
-            steps {
-                container('ez-docker-helm-build') {
-                    script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerauth') {
-                        // Build and Push Docker image using plugin methods
-                            docker.build(imageName: "${DOCKER_IMAGE}:${env.BUILD_NUMBER}", contextPath: './app')
-                            docker.push("${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
-                            docker.tag("${DOCKER_IMAGE}:${env.BUILD_NUMBER}", "${DOCKER_IMAGE}")
-                            docker.push("${DOCKER_IMAGE}")
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline post'
-        }
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed, check logs for more info!'
         }
     }
 }
