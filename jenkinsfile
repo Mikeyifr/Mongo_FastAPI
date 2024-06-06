@@ -50,7 +50,7 @@ pipeline {
             steps {
                 container('ez-docker-helm-build') {
                     script {
-                        withDockerRegistry(credentialsId: 'dockerauth') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerauth') {
                             // Build and Push Maven Docker image
                             sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_NUMBER} ./app"
                             sh "docker push ${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
