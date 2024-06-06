@@ -32,9 +32,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('clone repo') {
             steps {
-                checkout scm
+                script {
+                    sh 'git clone https://github.com/Mikeyifr/Mongo_FastAPI.git'
+                }
             }
         }
 
