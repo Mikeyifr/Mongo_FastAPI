@@ -47,9 +47,6 @@ pipeline {
         }
 
         stage('Build and Push Docker Images one with build number tag and one to replace the latest') {
-            when {
-                branch 'main'
-            }
             steps {
                 container('ez-docker-helm-build') {
                     script {
