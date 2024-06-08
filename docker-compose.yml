@@ -10,12 +10,12 @@ services:
 
   fastapi:
     build: ./app
-    image: app/fastapi
+    image: mikey8520/final-project:13
     networks:
       vnet:
         ipv4_address: 10.1.0.2
     ports: 
-      - 8080:8080
+      - 8000:8000
     depends_on:
       - mongo
 

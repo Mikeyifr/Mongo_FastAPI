@@ -17,7 +17,7 @@ spec:
       - name: app-container
         image: mikey8520/final-project:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -55,7 +55,7 @@ spec:
   ports:
   - name: http
     port: 8081
-    targetPort: 8080
+    targetPort: 8000
     nodePort: 30001
     protocol: TCP 
 ---
