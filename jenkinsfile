@@ -23,9 +23,6 @@ pipeline {
 
     stages {
         stage('checkout git') {
-            when { // makes it so the jenkins will skip when the changes are not in the app folder
-                changeset "app/*"
-            }
             steps {
                 script {
                     checkout scm
@@ -39,9 +36,6 @@ pipeline {
                 auth = 'dockerauth'
             }
             steps { 
-                when { // makes it so the jenkins will skip when the changes are not in the app folder
-                    changeset "app/*"
-                }
                 container('slave') {
                     script {
                         def image = docker.build("mikey8520/final-project", "./app")
