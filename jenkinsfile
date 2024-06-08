@@ -47,7 +47,7 @@ pipeline {
             steps { 
                 container('slave') {
                     script {
-                        docker.withRegistry('https://hub.docker.com/repository/docker/mikey8520/final-project', 'dockerauth') {
+                        withDockerRegistry(credentialsId: 'dockerauth') {
                             image.push("${env.BUILD_NUMBER}")
                             image.push("latest")
                         }
