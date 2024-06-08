@@ -5,16 +5,16 @@ pipeline {
             apiVersion: v1
             kind: Pod
             spec:
-            serviceAccount: jenkins-sa
-            containers:
-            - name: slave
-                image: jenkins/inbound-agent
-                tty: true
-            - name: maven
-                image: maven:alpine
-                command:
-                - cat
-                tty: true
+                serviceAccount: jenkins-sa
+                containers:
+                - name: slave
+                    image: jenkins/inbound-agent
+                    tty: true
+                - name: maven
+                    image: maven:alpine
+                    command:
+                    - cat
+                    tty: true
             '''
         }
     }
