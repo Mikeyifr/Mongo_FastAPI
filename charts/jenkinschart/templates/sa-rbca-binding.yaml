@@ -21,9 +21,9 @@ metadata:
   namespace: jenkins-namespace
   name: jenkins-secrets-reader
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["list", "watch"]
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
 ---
 # role binding
 apiVersion: rbac.authorization.k8s.io/v1

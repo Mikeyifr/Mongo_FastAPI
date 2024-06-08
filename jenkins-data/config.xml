@@ -23,6 +23,7 @@
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
     <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@4238.v41b_3ef14a_5d8">
+      <actions/>
       <name>kubernetes</name>
       <templates/>
       <serverUrl>https://10.0.0.14:59014</serverUrl>
@@ -34,7 +35,7 @@
       <restrictedPssSecurityContext>false</restrictedPssSecurityContext>
       <webSocket>true</webSocket>
       <directConnection>false</directConnection>
-      <credentialsId>kubercert2</credentialsId>
+      <credentialsId>kubercert</credentialsId>
       <containerCap>10</containerCap>
       <retentionTimeout>5</retentionTimeout>
       <connectTimeout>5</connectTimeout>

@@ -6,7 +6,14 @@
   <properties>
     <jenkins.console.ConsoleUrlProviderUserProperty/>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1337.v60b_d7b_c7b_c9f">
-      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
     </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
     <hudson.plugins.emailext.watching.EmailExtWatchAction_-UserProperty plugin="email-ext@1814.v404722f34263">
       <triggers/>
@@ -56,5 +63,8 @@
       </roles>
       <timestamp>1717502587919</timestamp>
     </jenkins.security.LastGrantedAuthoritiesProperty>
+    <hudson.plugins.favorite.user.FavoriteUserProperty plugin="favorite@2.208.v91d65b_7792a_c">
+      <data class="concurrent-hash-map"/>
+    </hudson.plugins.favorite.user.FavoriteUserProperty>
   </properties>
 </user>
