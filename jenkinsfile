@@ -7,10 +7,10 @@ pipeline {
             spec:
                 serviceAccount: jenkins-sa
                 containers:
-                - name: slave
+                  - name: slave
                     image: jenkins/inbound-agent
                     tty: true
-                - name: maven
+                  - name: maven
                     image: maven:alpine
                     command:
                     - cat
