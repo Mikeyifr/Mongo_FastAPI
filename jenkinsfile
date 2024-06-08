@@ -10,6 +10,11 @@ pipeline {
             - name: slave
                 image: jenkins/inbound-agent
                 tty: true
+            - name: maven
+                image: maven:alpine
+                command:
+                - cat
+                tty: true
             '''
         }
     }
@@ -25,8 +30,10 @@ pipeline {
 
         stage('build image') {
             steps {
-                script {
-                    def image = docker.build("mikey8520/final-project", "./app")
+                container('slave') {
+                    script {
+                        def image = docker.build("mikey8520/final-project", "./app")
+                    }
                 }
             }
         }
@@ -37,10 +44,12 @@ pipeline {
                 auth = 'dockerauth'
             }
             steps { 
-                script {
-                    docker.withRegistry('https://hub.docker.com/repository/docker/mikey8520/final-project', 'dockerauth') {
-                        image.push("${env.BUILD_NUMBER}")
-                        image.push("latest")
+                container('slave') {
+                    script {
+                        docker.withRegistry('https://hub.docker.com/repository/docker/mikey8520/final-project', 'dockerauth') {
+                            image.push("${env.BUILD_NUMBER}")
+                            image.push("latest")
+                        }
                     }
                 }
             }
