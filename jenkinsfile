@@ -8,7 +8,7 @@ pipeline {
                 serviceAccount: jenkins-sa
                 containers:
                   - name: slave
-                    image: jenkins/inbound-agent
+                    image: docker:latest
                     tty: true
                   - name: maven
                     image: maven:alpine
