@@ -33,7 +33,7 @@ pipeline {
             steps {
                 container('slave') {
                     script {
-                        def image = docker.build("mikey8520/final-project", "./app")
+                        sh 'docker build -t mikey8520/final-project ./app'
                     }
                 }
             }
@@ -48,8 +48,8 @@ pipeline {
                 container('slave') {
                     script {
                         withDockerRegistry(credentialsId: 'dockerauth') {
-                            image.push("${env.BUILD_NUMBER}")
-                            image.push("latest")
+                            sh 'docker push mikey8520/final-project:${env.BUILD_NUMBER}'
+                            sh 'docker push mikey8520/final-project'
                         }
                     }
                 }
