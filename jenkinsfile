@@ -10,6 +10,8 @@ pipeline {
                   - name: slave
                     image: docker:latest
                     tty: true
+                    securityContext:  # This section grants privileged access
+                        privileged: true
                   - name: maven
                     image: maven:alpine
                     command:
