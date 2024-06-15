@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
         - name: app-container
+          imagePullPolicy: Always
           image: "{{ .Values.fastapi.image.repository }}:{{ .Values.fastapi.image.tag }}"
           ports:
             - containerPort: {{ .Values.fastapi.image.container_port  }}

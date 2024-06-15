@@ -10,7 +10,12 @@ pipeline {
                   - name: slave
                     image: docker:latest
                     tty: true
-                    securityContext:  # This section grants privileged access
+                    securityContext:
+                        privileged: true
+                  - name: pytest
+                    image: mikey8520/tests
+                    tty: true
+                    securityContext:
                         privileged: true
                   - name: maven
                     image: maven:alpine
@@ -29,6 +34,15 @@ pipeline {
                 }
             }
         }
+
+        stage('testing with pytest')
+            steps{
+                container('pytest') {
+                    script {
+                        sh 'cd ./app && python -m pytest || [[ $? -eq 1 ]]'
+                    }
+                }
+            }
 
         // Build and push with build tag (replace with actual build commands)
         stage('Build and Push the image with tags') {

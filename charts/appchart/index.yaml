@@ -3,12 +3,23 @@ entries:
   appchart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-06-03T17:14:44.759658+03:00"
+    created: "2024-06-09T02:18:11.5136863+03:00"
     description: Application Helm chart for Kubernetes
-    digest: f5e57db4e514435c4131438d942a9805c2e9fce65b7dc7e3bbca05f0c977f480
+    digest: 9a7c981c6ed00381f918d5597225d9ee4fec99d97c7d9e3d573056361dd6f712
     name: appchart
     type: application
     urls:
     - appchart-0.1.0.tgz
     version: 0.1.0
-generated: "2024-06-03T17:14:44.7574514+03:00"
+  myproject:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-06-09T02:18:11.5143051+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 5b2a28c3923174b89d0d3909fd7b8768add51cd504c147ab65193f58ff4d9079
+    name: myproject
+    type: application
+    urls:
+    - myproject-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-06-09T02:18:11.5120626+03:00"
