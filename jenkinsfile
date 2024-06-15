@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('testing with pytest')
+        stage('testing with pytest') {
             steps{
                 container('pytest') {
                     script {
@@ -43,7 +43,7 @@ pipeline {
                     }
                 }
             }
-
+        }
         // Build and push with build tag (replace with actual build commands)
         stage('Build and Push the image with tags') {
             environment {
