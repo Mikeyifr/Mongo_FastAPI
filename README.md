@@ -1,10 +1,13 @@
 # Welcome to my project!
 
 ### Home-Page Capture
+
 <div align="center"><img src="/readme_images/loc.png" alt="fastapi" width="756.5" height="239"></div>
 
 ### Company-Info Capture
+
 <div align="center"><img src="/readme_images/info.png" alt="fastapi" width="778" height="590"></div>
+
 
 the heart of the project is a fastAPI application written in python.
 
