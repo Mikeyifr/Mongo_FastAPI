@@ -14,7 +14,8 @@ from fastapi.staticfiles import StaticFiles
 # MongoDB connection
 username = "root"
 password = "root"
-client = MongoClient(f"mongodb://{username}:{password}@mongo.default.svc.cluster.local:27017")
+client = MongoClient(f"mongodb://{username}:{password}@localhost:27018")
+# client = MongoClient(f"mongodb://{username}:{password}@mongo.default.svc.cluster.local:27017")
 db = client.companies
 companies_collection = db.companies
 revenues_collection = db.revenues

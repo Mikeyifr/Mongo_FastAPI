@@ -22,6 +22,13 @@ def average_revenue(company_revenues):
     revenue_sum = 0
     for rev in company_revenues:
         this_year_revenue = int(rev["revenue"][0:-1])
+        if rev["revenue"][-1] == "k":
+            this_year_revenue *= 1000
+        if rev["revenue"][-1] == "m":
+            this_year_revenue *= 1000000
         revenue_sum += this_year_revenue
-    revavg = str(round(revenue_sum / len(company_revenues), 2)) + "k"
+    if revenue_sum < 1000000:
+        revavg = str(round((revenue_sum / len(company_revenues) / 1000), 2)) + "k"
+    else:
+        revavg = str(round((revenue_sum / len(company_revenues) / 1000000), 2)) + "m"
     return revavg
