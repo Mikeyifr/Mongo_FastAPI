@@ -20,7 +20,7 @@ A FastAPI app that performs several actions in mongoDB database
 
 ### MongoDB
 A Database that contains company information and revenues in a json form 
-<div align="center"><img src="/readme_images/fastapi.png" alt="fastapi" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/mongo.png" alt="fastapi" width="500" height="300"></div>
 
 ### argoCD
 Deploys the application and the jenkinsfile.
@@ -29,7 +29,7 @@ Use the argocd-config-and-deploy.yaml that specifies the argo applications.
 
 ### promethues
 Scrapes both the App pods and the MongoDB pods
-<div align="center"><img src="/readme_images/mongo.png" alt="mongo" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/promethues.png" alt="mongo" width="500" height="300"></div>
 
 ### grafana
 that needs the grafana-service.yaml to grant access from outside the cluster.
