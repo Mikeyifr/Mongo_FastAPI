@@ -9,6 +9,7 @@
 <div align="center"><img src="/readme_images/info.png" alt="fastapi" width="778" height="590"></div>
 
 
+
 the heart of the project is a fastAPI application written in python.
 
 the application tracks companies and the company's revenues with the user's input.
