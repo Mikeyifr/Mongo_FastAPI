@@ -16,24 +16,24 @@ every other chart needs to be deployed by using an helm install command.
 
 ### FastApi
 A FastAPI app that performs several actions in mongoDB database
-<div align="center"><img src="/images/fastapi.png" alt="fastapi" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/fastapi.png" alt="fastapi" width="500" height="300"></div>
 
 ### MongoDB
 A Database that contains company information and revenues in a json form 
-<div align="center"><img src="/images/fastapi.png" alt="fastapi" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/fastapi.png" alt="fastapi" width="500" height="300"></div>
 
 ### argoCD
 Deploys the application and the jenkinsfile.
 Use the argocd-config-and-deploy.yaml that specifies the argo applications.
-<div align="center"><img src="/images/argo.png" alt="argo" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/argo.png" alt="argo" width="500" height="300"></div>
 
 ### promethues
 Scrapes both the App pods and the MongoDB pods
-<div align="center"><img src="/images/mongo.png" alt="mongo" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/mongo.png" alt="mongo" width="500" height="300"></div>
 
 ### grafana
 that needs the grafana-service.yaml to grant access from outside the cluster.
-<div align="center"><img src="/images/grafana.png" alt="grafana" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/grafana.png" alt="grafana" width="500" height="300"></div>
 
 
 ## Commands:
