@@ -10,6 +10,8 @@
 
 
 
+### Project description
+
 the heart of the project is a fastAPI application written in python.
 
 the application tracks companies and the company's revenues with the user's input.
