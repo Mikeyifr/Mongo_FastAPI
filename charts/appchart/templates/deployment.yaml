@@ -12,6 +12,9 @@ spec:
     metadata:
       labels:
         app: fastapi
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "{{ .Values.fastapi.image.container_port  }}"
     spec:
       containers:
         - name: app-container
@@ -33,6 +36,9 @@ spec:
     metadata:
       labels:
         db: mongo
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "27017"
     spec:
       containers:
       - name: mongo-container
@@ -44,4 +50,18 @@ spec:
           value: "{{ .Values.mongo.cred.username }}"
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "{{ .Values.mongo.cred.password }}"
+        volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+        resources:
+            requests:
+              memory: 512Mi
+              cpu: "500m"
+            limits:
+              memory: 2Gi
+              cpu: 2
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
 ---

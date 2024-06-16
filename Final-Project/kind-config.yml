@@ -13,6 +13,8 @@ nodes:
   extraMounts:
   - hostPath: ./jenkins-data
     containerPath: /jenkins-data
+  - hostPath: ./mongo-data
+    containerPath: /data/pv-data/mongodb
   extraPortMappings:
   - containerPort: 30001
     hostPort: 80
@@ -22,4 +24,7 @@ nodes:
     listenAddress: "0.0.0.0"
   - containerPort: 30080
     hostPort: 8888
+    listenAddress: "0.0.0.0"
+  - containerPort: 30003
+    hostPort: 3000
     listenAddress: "0.0.0.0"
