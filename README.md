@@ -1,15 +1,5 @@
 # Welcome to my project!
 
-### Home-Page Capture
-
-<div align="center"><img src="/readme_images/loc.png" alt="fastapi" width="756.5" height="239"></div>
-
-### Company-Info Capture
-
-<div align="center"><img src="/readme_images/info.png" alt="fastapi" width="778" height="590"></div>
-
-
-
 ### Project description
 
 the heart of the project is a fastAPI application written in python.
@@ -23,6 +13,17 @@ this project contains helm charts for both my application and jenkins.
 the project also contains a kind-config.yaml to handle all of the port forwarding and host volumes.
 
 every other chart needs to be deployed by using an helm install command.
+
+
+
+### Home-Page Capture
+
+<div align="center"><img src="/readme_images/loc.png" alt="fastapi" width="756.5" height="239"></div>
+
+### Company-Info Capture
+
+<div align="center"><img src="/readme_images/info.png" alt="fastapi" width="778" height="590"></div>
+
 
 ## charts
 
