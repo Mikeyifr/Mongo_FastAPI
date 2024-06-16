@@ -29,7 +29,7 @@ Use the argocd-config-and-deploy.yaml that specifies the argo applications.
 
 ### promethues
 Scrapes both the App pods and the MongoDB pods
-<div align="center"><img src="/readme_images/promethues.png" alt="mongo" width="500" height="300"></div>
+<div align="center"><img src="/readme_images/prometheus.png" alt="mongo" width="500" height="300"></div>
 
 ### grafana
 that needs the grafana-service.yaml to grant access from outside the cluster.
