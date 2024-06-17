@@ -44,17 +44,29 @@ pipeline {
                 }
             }
         }
+
         // Build and push with build tag (replace with actual build commands)
         stage('Build and Push the image with tags') {
-            environment {
-                auth = 'dockerauth'
+            when {
+                branch 'feature'
             }
             steps { 
                 container('slave') {
                     script {
+                        def manualApprovalGranted = input message: 'Approve deployment to main?', ok: 'Approve'
+                        if (env.BRANCH_NAME == 'master') {
+                            def tag = ${env.BUILD_NUMBER} 
+                        } else if (manualApprovalGranted && env.BRANCH_NAME == 'feature') {
+                            def tag = ${env.BUILD_NUMBER}
+                            withCredentials([string(credentialsId: 'git-token', variable: 'GIT-TOKEN')]) {
+                                sh 'git checkout main'
+                                sh 'git branch -D feature'
+                                sh "git push origin --delete feature"
+                            }
+                        }
                         def image = docker.build("mikey8520/final-project", "./app")
                         withDockerRegistry(credentialsId: 'dockerauth') {
-                            image.push("${env.BUILD_NUMBER}")
+                            image.push("${tag}")
                             image.push("latest")
                         }
                     }
